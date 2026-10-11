@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(vercel:*)",
+      "Bash(npx vercel:*)",
+      "Bash(git push origin main:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Read(./.env*)"
+    ]
+  }
+}
