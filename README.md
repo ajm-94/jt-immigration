@@ -65,7 +65,7 @@ English; Claude pushes a branch and replies with its Vercel preview link
 change" reverts it the same way. Nobody needs to open GitHub.
 
 - `CLAUDE.md` tells Claude how to work with a non-technical requester, when it may publish, and what it must never touch.
-- `.claude/settings.json` blocks `vercel` commands, force-pushes and reading `.env` files.
+- `.claude/settings.json` blocks `vercel` commands, force-pushes and reading `.env` files, and installs packages at the start of each cloud session (no setup script needed).
 - `.github/workflows/checks.yml` runs type check, lint and a full build on every push to `main` (and on any pull request).
 - Vercel needs, for **Preview** only: `STORE_PREFIX=preview/` and an `ADMIN_PASSWORD`; and Deployment Protection off for
   previews so the link opens without a Vercel login.

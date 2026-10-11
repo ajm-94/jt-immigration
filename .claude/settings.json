@@ -7,5 +7,17 @@
       "Bash(git push -f:*)",
       "Read(./.env*)"
     ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ \"$CLAUDE_CODE_REMOTE\" = \"true\" ] && [ ! -d node_modules ]; then npm ci --no-audit --no-fund >/dev/null 2>&1; fi; exit 0"
+          }
+        ]
+      }
+    ]
   }
 }
