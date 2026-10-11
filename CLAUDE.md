@@ -31,7 +31,7 @@ change, make it, and if it conflicts with Immigration Service guidance (irishimm
 
 ## Checking your work
 
-Run `npx tsc --noEmit` and `npm run lint` and fix anything they report before finishing. GitHub runs the same checks
+Run `npx next typegen && npx tsc --noEmit` and `npm run lint` and fix anything they report before finishing. GitHub runs the same checks
 plus a full build on every pull request; a red check means the change must not be merged.
 
 ## Finishing a change (tell her these steps every time)
