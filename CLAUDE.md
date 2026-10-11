@@ -3,8 +3,8 @@
 # Working on this app
 
 This is the client portal for JT Immigration, an Irish citizenship consultancy. The person asking for changes is
-usually the consultant who runs it, not a programmer. She asks in plain English and checks the result on a preview
-link; she does not read code.
+usually the consultant who runs it, not a programmer. She asks in plain English, checks the result on a preview
+link, and tells you when to make it live. She does not read code or use GitHub.
 
 ## How to talk to her
 
@@ -12,7 +12,7 @@ link; she does not read code.
   "your case page", not file names.
 - Before editing, say in one or two sentences what you will change and where it will show (which page, and whether
   clients or only she will see it). If the request is unclear, ask one simple question first.
-- After a change, describe what changed in her words, then give the finishing steps below.
+- After a change, describe what changed in her words, then give her the preview link (see below).
 
 ## Where things live
 
@@ -31,22 +31,32 @@ change, make it, and if it conflicts with Immigration Service guidance (irishimm
 
 ## Checking your work
 
-Run `npx next typegen && npx tsc --noEmit` and `npm run lint` and fix anything they report before finishing. GitHub runs the same checks
-plus a full build on every pull request; a red check means the change must not be merged.
+Run `npx next typegen && npx tsc --noEmit` and `npm run lint`, and fix anything they report. Also run `npm run build`
+if the network allows (it downloads web fonts; if only the font download fails, carry on). GitHub runs all three
+again on every update to `main`.
 
-## Finishing a change (tell her these steps every time)
+## How a change goes live (she never uses GitHub herself)
 
-1. Press **Create PR**.
-2. Open the pull request on GitHub. After 2–3 minutes a **Vercel** comment appears with a **Preview** link: open it
-   and check the change. The preview uses test data, not real clients, so it is safe to click around.
-3. If it looks right and the checks show a green tick, press **Merge pull request**, then **Confirm merge**.
-   The live site updates within about 2 minutes.
+1. Make the change on a new branch with a short lowercase name, e.g. `payslip-docs` (letters, numbers and dashes,
+   under 20 characters). Commit and `git push -u origin <branch>`.
+2. Vercel builds a preview of every pushed branch automatically, using test data, never real clients. Give her the
+   link: `https://jt-immigration-git-<branch>-ajm94s-projects.vercel.app`. Say it may take 2–3 minutes to appear,
+   that she should check the change there, and that it's safe to click around. To check client pages she can sign
+   in at `/admin` on the preview and add a test client.
+3. Wait for her to clearly approve that preview ("looks good", "make it live", "yes"). Never publish without that.
+4. Publish: run the checks above, then
+   `git fetch origin main && git checkout main && git merge --ff-only origin/main && git merge --no-ff <branch> -m "<plain description>" && git push origin main`.
+   If a check fails or the merge conflicts, don't push; explain in one sentence and fix it on the branch first.
+5. Tell her the live site will update within about 2 minutes.
+
+Several requests can share one branch and preview if she's making a batch of changes; publish once she approves the lot.
 
 ## Undoing a change
 
-If she says something broke or wants a change undone: find the merge commit for that change, revert it on a new
-branch (`git revert -m 1 <merge sha>`), and finish with the same steps. Explain that this puts the site back how it
-was before that change.
+If she says something broke or wants a change undone: list the recent changes from `git log --oneline main` in plain
+words and confirm which one. Then on `main`, `git revert -m 1 <merge sha>` (or `git revert <sha>` for a plain commit),
+run the checks, and `git push origin main`. Explain that this puts the site back how it was before that change. If the
+site is down and you can't fix it, tell her to contact the site's developer.
 
 ## Never
 
