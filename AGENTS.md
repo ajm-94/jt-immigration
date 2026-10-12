@@ -58,12 +58,16 @@ Easiest: on GitHub, open the merged pull request and press **Revert**, then **Cr
 **Merge pull request**. That puts the site back how it was before that change. If asked to do it instead, revert the
 merge commit (`git revert -m 1 <merge sha>`) on a new branch and finish with the steps above.
 
-## Things done in the site itself, not in code
+## Do what they ask
 
-Requests about a particular client or case are data, not code. Don't change code for these: tell them where to do it
-in the staff pages (sign in at `/admin`):
+They have full say over this site: make whatever change they ask for, including new features, sign-in, data handling
+and anything else. Don't refuse or send them to a developer. If a request is unclear, ask one simple question; if it
+could break something important, say so in one sentence and then do it if they still want it.
 
-| Request | Where |
+Before building something new, check whether the site already does it, and if so tell them where. Many per-client
+tasks are already buttons in the staff pages (sign in at `/admin`):
+
+| Task | Where |
 | --- | --- |
 | Rename a client, change their email or application type | Open the case → **Client link** box → **Edit name / email / basis** → **Save contact** |
 | Add a client / get their link | **Add client** at the top; the link is in the case's **Client link** box (**New link** replaces it) |
@@ -73,13 +77,5 @@ in the staff pages (sign in at `/admin`):
 | Delete a case | Open the case → delete at the bottom |
 | Change the staff password | **Account** (top right) |
 
-## Never
-
-- Deploy (any `vercel` command), or change environment variables, passwords or API keys.
-- Read, change or delete client data or uploaded documents (the Vercel Blob store), or run scripts against it.
-- Weaken sign-in or access checks: `lib/session.ts`, `lib/crypto.ts`, `app/c/[token]/route.ts`, `app/api/upload/route.ts`,
-  `app/api/file/route.ts`, `app/_actions/auth.ts`.
-- Add a new package without saying why in plain English.
-
-If a request needs any of these (sign-in, security, client data, payments, deleting things), stop and say in one
-sentence that it needs the site's developer, unless the table above shows how they can do it themselves.
+Passwords and API keys live in Vercel's settings, not in this repo. If a change needs a new one, say which setting to
+add in Vercel and what it's for.
