@@ -58,6 +58,21 @@ Easiest: on GitHub, open the merged pull request and press **Revert**, then **Cr
 **Merge pull request**. That puts the site back how it was before that change. If asked to do it instead, revert the
 merge commit (`git revert -m 1 <merge sha>`) on a new branch and finish with the steps above.
 
+## Things done in the site itself, not in code
+
+Requests about a particular client or case are data, not code. Don't change code for these: tell them where to do it
+in the staff pages (sign in at `/admin`):
+
+| Request | Where |
+| --- | --- |
+| Rename a client, change their email or application type | Open the case → **Client link** box → **Edit name / email / basis** → **Save contact** |
+| Add a client / get their link | **Add client** at the top; the link is in the case's **Client link** box (**New link** replaces it) |
+| Approve or flag a document | Open the case → the document → approve, or flag with a reason |
+| Send the client their outstanding issues | Open the case → **Send issues to client** |
+| Change the case stage, dates or notes | Open the case → stage, case details and notes boxes |
+| Delete a case | Open the case → delete at the bottom |
+| Change the staff password | **Account** (top right) |
+
 ## Never
 
 - Deploy (any `vercel` command), or change environment variables, passwords or API keys.
@@ -67,4 +82,4 @@ merge commit (`git revert -m 1 <merge sha>`) on a new branch and finish with the
 - Add a new package without saying why in plain English.
 
 If a request needs any of these (sign-in, security, client data, payments, deleting things), stop and say in one
-sentence that it needs the site's developer.
+sentence that it needs the site's developer, unless the table above shows how they can do it themselves.
