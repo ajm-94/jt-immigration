@@ -80,6 +80,19 @@ export async function newClientLink(appId: string): Promise<FormState> {
   return { ok: "Old link no longer works.", link: await accessLink(user), linkNote: "New link:" };
 }
 
+export async function updateClientName(appId: string, _prev: FormState, form: FormData): Promise<FormState> {
+  const { viewer, app } = await requireStaffApplication(appId);
+  const name = String(form.get("name") ?? "").trim();
+  if (!name) return { error: "Enter the client's name." };
+  if (name.length > 120) return { error: "Keep the name to 120 characters or fewer." };
+  if (name === app.clientName) return { ok: "No change." };
+  if (app.ownerId) await updateUser(app.ownerId, (u) => ({ ...u, name }));
+  await updateApplication(appId, (a) => withActivity({ ...a, clientName: name }, viewer.name, `Updated client name to ${name}`));
+  revalidateCase(appId);
+  revalidatePath("/portal");
+  return { ok: "Client name saved." };
+}
+
 export async function updateClientContact(appId: string, _prev: FormState, form: FormData): Promise<FormState> {
   const { viewer, app } = await requireStaffApplication(appId);
   const name = str(form, "name", 120);

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { after } from "next/server";
 import { Messages } from "@/components/Messages";
+import { ClientNameEditor } from "@/components/ClientNameEditor";
 import { ReviewControls } from "@/components/ReviewControls";
 import { UploadRow } from "@/components/UploadRow";
 import { ActionForm, CopyBox } from "@/components/forms";
@@ -57,6 +58,7 @@ export default async function CasePage({ params }: PageProps<"/admin/cases/[id]"
       <div className="mt-1 flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold text-navy">{app.clientName ?? `Draft ${id.slice(0, 8).toUpperCase()}`}</h1>
+          <ClientNameEditor appId={id} name={app.clientName} />
           <p className="mt-0.5 text-sm text-slate-500">
             {app.clientEmail ?? "no email"}
             {typeof app.answers.phone === "string" && app.answers.phone ? ` · ${app.answers.phone}` : ""} · {cl.basis.short} · Ref {id.slice(0, 8).toUpperCase()} · created {fmtDate(app.createdAt)}
