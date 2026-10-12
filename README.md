@@ -56,18 +56,18 @@ npm run dev
 `.env.development.local` sets `STORE_PREFIX=dev/` (and a local-only setup password) so local testing never
 touches live data — everything you create locally lives under `dev/` in the Blob store.
 
-## Making changes with Claude (no coding needed)
+## Making changes with an AI assistant (no coding needed)
 
-The repo is set up for Claude Code on the web (claude.ai/code or the Claude app's Code tab). Ask for a change in plain
-English; Claude pushes a branch and replies with its Vercel preview link
-(`jt-immigration-git-<branch>-ajm94s-projects.vercel.app`). Reply
-"make it live" and Claude runs the checks and merges to `main`; the live site redeploys in ~2 minutes. "Undo that
-change" reverts it the same way. Nobody needs to open GitHub.
+Set up for ChatGPT Codex (chatgpt.com/codex) and Claude Code on the web. Both read the instructions in `AGENTS.md`
+(`CLAUDE.md` just imports it). Ask for a change in plain English; the assistant opens a pull request. On the pull
+request, Vercel comments a **Preview** link; check it, and if the **Checks** are green press **Merge pull request**.
+The live site redeploys in ~2 minutes. To undo, press **Revert** on the merged pull request and merge the revert.
 
-- `CLAUDE.md` tells Claude how to work with a non-technical requester, when it may publish, and what it must never touch.
-- `.claude/settings.json` blocks `vercel` commands, force-pushes and reading `.env` files, and installs packages at the start of each cloud session (no setup script needed).
-- `.github/workflows/checks.yml` runs type check, lint and a full build on every push to `main` (and on any pull request).
-- Vercel: Deployment Protection off for previews so the link opens without a Vercel login.
+- `AGENTS.md` tells the assistant how to work with a non-technical requester and what it must never touch.
+- `.github/workflows/checks.yml` runs type check, lint and a full build on every pull request and on `main`.
+- `.claude/settings.json` (Claude only) blocks `vercel` commands, force-pushes and reading `.env` files, and installs
+  packages at the start of each cloud session.
+- Codex environment: setup script `npm ci`.
 - Previews currently share the live data store. Before real clients use the site, set `STORE_PREFIX=preview/` for the
   **Preview** environment (`vercel env add STORE_PREFIX preview`) so previews get their own test data, plus a Preview
-  `ADMIN_PASSWORD` to create the first staff login there, and update the preview wording in `CLAUDE.md`.
+  `ADMIN_PASSWORD` to create the first staff login there, and update the preview wording in `AGENTS.md`.
