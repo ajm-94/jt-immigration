@@ -47,6 +47,11 @@ it must not be merged.
 
 If it isn't right, describe what to change and update the same pull request.
 
+Follow-up requests in the same conversation go on the same branch and pull request: push the update to it rather than
+opening a new one. Remind them that opening a pull request does not change the live site (only merging does), and that
+the same Preview link refreshes about 2 minutes after each update. Several changes can be batched into one pull request
+and merged together.
+
 ## Undoing a change
 
 Easiest: on GitHub, open the merged pull request and press **Revert**, then **Create pull request**, then
