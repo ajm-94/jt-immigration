@@ -6,6 +6,10 @@ This is the client portal for JT Immigration, an Irish citizenship consultancy. 
 usually a family member of the consultant who runs it, not a programmer. They ask in plain English, check the result
 on a preview link, and make it live by merging the pull request on GitHub. They don't read code.
 
+The code is the GitHub repo `ajm-94/jt-immigration`. The live site is https://jt-immigration.vercel.app, hosted on
+Vercel (not ChatGPT Sites). Vercel rebuilds it automatically: a Preview for every pull request, and the live site when a
+pull request is merged into `main`. There's nothing to connect or deploy by hand.
+
 ## How to talk to them
 
 - Plain English, short sentences, no jargon or code in replies unless asked. Say "the page clients see" or
