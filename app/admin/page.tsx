@@ -76,9 +76,14 @@ export default async function AdminPage({ searchParams }: PageProps<"/admin">) {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-semibold text-navy">Cases</h1>
         <div className="flex flex-wrap items-center gap-2">
-          <form className="flex gap-2">
-            <input name="q" defaultValue={q} placeholder="Search name, email, ISD no., phone" className="w-64 rounded-md border border-slate-300 px-3 py-1.5 text-sm" />
-            <button className="rounded-md border border-slate-300 px-3 py-1.5 text-sm hover:bg-slate-50">Search</button>
+          <form className="space-y-1.5">
+            <label htmlFor="client-search" className="block text-xs font-medium text-slate-600">Search clients</label>
+            <div className="flex flex-wrap items-center gap-2">
+              <input id="client-search" type="search" name="q" defaultValue={q} placeholder="Name, email, case ID, ISD number or phone" aria-describedby="client-search-hint" className="w-full rounded-md border border-slate-300 px-3 py-1.5 text-sm sm:w-80" />
+              <button className="rounded-md border border-slate-300 px-3 py-1.5 text-sm hover:bg-slate-50">Search</button>
+              {q && <Link href={`/admin?view=${encodeURIComponent(view)}`} className="text-sm text-emerald-700 hover:underline">Clear search</Link>}
+            </div>
+            <p id="client-search-hint" className="text-xs text-slate-500">Search across all cases, including closed cases.</p>
           </form>
           <Link href="/admin/invite" className="rounded-md bg-emerald-700 px-4 py-1.5 text-sm font-medium text-white hover:bg-emerald-800">
             + Add client
