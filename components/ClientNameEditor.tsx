@@ -3,7 +3,7 @@
 import { useActionState, useState } from "react";
 import { updateClientName } from "@/app/admin/actions";
 import type { FormState } from "@/components/forms";
-import { btnSecondary, inputCls, labelCls } from "@/components/ui";
+import { btnPrimary, btnSecondary, inputCls, labelCls } from "@/components/ui";
 
 export function ClientNameEditor({ appId, name }: { appId: string; name?: string }) {
   const [editing, setEditing] = useState(false);
@@ -34,7 +34,7 @@ function NameForm({ appId, name, onCancel, onSaved }: { appId: string; name?: st
       </label>
       {state.error && <p role="alert" className="text-sm text-red-700">{state.error}</p>}
       <div className="flex gap-2">
-        <button type="submit" disabled={pending} className={btnSecondary}>{pending ? "Saving…" : "Save name"}</button>
+        <button type="submit" disabled={pending} className={btnPrimary}>{pending ? "Saving…" : "Save name"}</button>
         <button type="button" disabled={pending} className={btnSecondary} onClick={onCancel}>Cancel</button>
       </div>
     </form>
