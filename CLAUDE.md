@@ -39,10 +39,11 @@ again on every update to `main`.
 
 1. Make the change on a new branch with a short lowercase name, e.g. `payslip-docs` (letters, numbers and dashes,
    under 20 characters). Commit and `git push -u origin <branch>`.
-2. Vercel builds a preview of every pushed branch automatically, using test data, never real clients. Give her the
-   link: `https://jt-immigration-git-<branch>-ajm94s-projects.vercel.app`. Say it may take 2–3 minutes to appear,
-   that she should check the change there, and that it's safe to click around. To check client pages she can sign
-   in at `/admin` on the preview and add a test client.
+2. Vercel builds a preview of every pushed branch automatically. Give her the link:
+   `https://jt-immigration-git-<branch>-ajm94s-projects.vercel.app`. Say it may take 2–3 minutes to appear and that
+   she should check the change there. The preview currently shares the live site's data, so tell her she can look
+   around and sign in with her usual password, but anything she adds or deletes on the preview also happens on the
+   live site.
 3. Wait for her to clearly approve that preview ("looks good", "make it live", "yes"). Never publish without that.
 4. Publish: run the checks above, then
    `git fetch origin main && git checkout main && git merge --ff-only origin/main && git merge --no-ff <branch> -m "<plain description>" && git push origin main`.

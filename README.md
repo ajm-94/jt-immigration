@@ -60,12 +60,14 @@ touches live data — everything you create locally lives under `dev/` in the Bl
 
 The repo is set up for Claude Code on the web (claude.ai/code or the Claude app's Code tab). Ask for a change in plain
 English; Claude pushes a branch and replies with its Vercel preview link
-(`jt-immigration-git-<branch>-ajm94s-projects.vercel.app`, test data under `preview/`, never real clients). Reply
+(`jt-immigration-git-<branch>-ajm94s-projects.vercel.app`). Reply
 "make it live" and Claude runs the checks and merges to `main`; the live site redeploys in ~2 minutes. "Undo that
 change" reverts it the same way. Nobody needs to open GitHub.
 
 - `CLAUDE.md` tells Claude how to work with a non-technical requester, when it may publish, and what it must never touch.
 - `.claude/settings.json` blocks `vercel` commands, force-pushes and reading `.env` files, and installs packages at the start of each cloud session (no setup script needed).
 - `.github/workflows/checks.yml` runs type check, lint and a full build on every push to `main` (and on any pull request).
-- Vercel needs, for **Preview** only: `STORE_PREFIX=preview/` and an `ADMIN_PASSWORD`; and Deployment Protection off for
-  previews so the link opens without a Vercel login.
+- Vercel: Deployment Protection off for previews so the link opens without a Vercel login.
+- Previews currently share the live data store. Before real clients use the site, set `STORE_PREFIX=preview/` for the
+  **Preview** environment (`vercel env add STORE_PREFIX preview`) so previews get their own test data, plus a Preview
+  `ADMIN_PASSWORD` to create the first staff login there, and update the preview wording in `CLAUDE.md`.
