@@ -48,6 +48,19 @@ Old applications started before accounts (UUID links) still work: opening the li
 
 ## Local dev
 
+Staff case pages include a bank-statement POS checker. Select uploaded PDFs, choose the first of three
+consecutive months, review the extracted dates, and confirm Irish point-of-sale purchases individually.
+The checker counts only confirmed rows; staff also confirm identity/address and bank regulation.
+PDF extraction runs in the browser, with pasted text and manual entry for scans or unsupported layouts.
+Review results are temporary and do not automatically approve documents. Remove duplicate rows from overlapping statements.
+
+Run the POS parsing/counting regression checks with:
+
+```bash
+npx tsc tests/bank-statement.ts lib/bank-statement.ts --outDir /tmp/jt-bank-tests --module commonjs --target es2017 --skipLibCheck --esModuleInterop
+node /tmp/jt-bank-tests/tests/bank-statement.js
+```
+
 ```bash
 vercel env pull .env.local   # BLOB_READ_WRITE_TOKEN, ADMIN_PASSWORD
 npm run dev

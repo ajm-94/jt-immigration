@@ -3,6 +3,7 @@ import Link from "next/link";
 import { after } from "next/server";
 import { Messages } from "@/components/Messages";
 import { ClientNameEditor } from "@/components/ClientNameEditor";
+import { BankStatementChecker } from "@/components/BankStatementChecker";
 import { ReviewControls } from "@/components/ReviewControls";
 import { UploadRow } from "@/components/UploadRow";
 import { ActionForm, CopyBox } from "@/components/forms";
@@ -136,6 +137,8 @@ export default async function CasePage({ params }: PageProps<"/admin/cases/[id]"
               </div>
             </details>
           </div>
+
+          <BankStatementChecker files={uploads.map(({ path, filename, size }) => ({ path, filename, size }))} />
 
           {groupItems(cl.items, cl.basis).map((section) => (
             <div key={section.key}>
